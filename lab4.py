@@ -62,7 +62,7 @@ def analyze_folders(folder_paths):
  all_test_title_word_counts = []
  all_test_text_word_counts = []
  for i, folder_path in enumerate(folder_paths):
-  print(f"\nТестовая выборка для папки: {folder_path}")
+  # print(f"\nТестовая выборка для папки: {folder_path}")
   
   # test_title_word_counts = defaultdict(lambda: {'count': 0, 'lemma': ''})
   # test_text_word_counts = defaultdict(lambda: {'count': 0, 'lemma': ''})
@@ -112,7 +112,7 @@ def analyze_folders(folder_paths):
   # Вывод коэффициентов близости для каждого текста из тестовой выборки
   print("nКоэффициенты близости:")
   for j, (test_title_word_counts, test_text_word_counts) in enumerate(zip(all_test_title_word_counts, all_test_text_word_counts)):
-    print(f"nТекст {j+1}:")  # Вывод имени файла
+    print(f"nТекст {j+1}:")  
     for i, (title_words, text_words) in enumerate(zip(all_title_word_counts, all_text_word_counts)):
       kb = 0
       for word in test_title_word_counts:
