@@ -9,12 +9,12 @@ def analyze_folders(folder_paths):
 
  lemmatizer = WordNetLemmatizer()
  stop_words = set(stopwords.words('english'))
- k = 2 # Повышающий коэффициент для заголовков
+ k = 2 # Пкф для заголовка
 
- all_title_word_counts = [] # Список словарей частотности слов для заголовков
- all_text_word_counts = [] # Список словарей частотности слов для основного текста
+ all_title_word_counts = [] 
+ all_text_word_counts = [] 
  for i, folder_path in enumerate(folder_paths):
-  print(f"\nАнализирую папку: {folder_path}")
+  # print(f"\nАнализирую папку: {folder_path}")
 
   title_word_counts = defaultdict(lambda: {'count': 0, 'lemma': ''})
   text_word_counts = defaultdict(lambda: {'count': 0, 'lemma': ''})
@@ -54,19 +54,10 @@ def analyze_folders(folder_paths):
       for word, data in sorted(text_word_counts.items(), key=lambda item: item[1]['count'], reverse=True):
         file.write(f"{data['lemma']}: {data['count']}\n")
 
-  # # Проверка, есть ли достаточное количество тем
-  # if len(all_title_word_counts) < 3:
-  #   print("Недостаточно тем для анализа.")
-  #   return
-  # print("\nФормирование словарей для тестовой выборки:")
  all_test_title_word_counts = []
  all_test_text_word_counts = []
  for i, folder_path in enumerate(folder_paths):
-  # print(f"\nТестовая выборка для папки: {folder_path}")
-  
-  # test_title_word_counts = defaultdict(lambda: {'count': 0, 'lemma': ''})
-  # test_text_word_counts = defaultdict(lambda: {'count': 0, 'lemma': ''})
-          
+ 
   test_files = random.sample(os.listdir(folder_path), 9)
   
   for filename in test_files:
@@ -81,7 +72,7 @@ def analyze_folders(folder_paths):
       title = ""
       text = text
 
-          # Создание словарей для тестовой выборки
+          # словари тестовой выборки
      test_title_word_counts = defaultdict(lambda: {'count': 0, 'lemma': ''})
      test_text_word_counts = defaultdict(lambda: {'count': 0, 'lemma': ''})
 
@@ -109,7 +100,6 @@ def analyze_folders(folder_paths):
       for word, data in sorted(test_text_word_counts.items(), key=lambda item: item[1]['count'], reverse=True):
         file.write(f"{data['lemma']}: {data['count']}n")
 
-  # Вывод коэффициентов близости для каждого текста из тестовой выборки
   print("nКоэффициенты близости:")
   for j, (test_title_word_counts, test_text_word_counts) in enumerate(zip(all_test_title_word_counts, all_test_text_word_counts)):
     print(f"nТекст {j+1}:")  
@@ -121,10 +111,9 @@ def analyze_folders(folder_paths):
       for word in test_text_word_counts:
         if word in text_words:
           kb += text_words[word]['count']
-      print(f"{os.path.basename(folder_paths[i])}: {kb}")  # Вывод имени папки как названия тематики
+      print(f"{os.path.basename(folder_paths[i])}: {kb}") 
 
 if __name__ == "__main__":
-  # Пути к папкам с текстами 
   folder_paths = [
     r"C:\Users\admin\Desktop\ИС\archive (1)\business",
     r"C:\Users\admin\Desktop\ИС\archive (1)\entertainment",
