@@ -5,6 +5,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten
 from tensorflow.keras.utils import to_categorical
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Загрузка набора данных MNIST
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -51,7 +52,16 @@ plt.title('Потери модели')
 plt.ylabel('Потери')
 plt.xlabel('эпоха')
 plt.legend(['обучение', 'тест'], loc='upper left')
+plt.show()
 
+random_index = np.random.randint(0, len(x_test))
+random_image = x_test[random_index]
+random_label = y_test[random_index]
 
+predictions = model.predict(np.expand_dims(random_image, axis=0))
+predicted_class = np.argmax(predictions)
 
+plt.figure()
+plt.imshow(random_image, cmap='gray')
+plt.title(f"случайная: {np.argmax(random_label)}, предсказание: {predicted_class}")
 plt.show()
